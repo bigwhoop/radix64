@@ -1,0 +1,25 @@
+{
+  "name": "bigwhoop/radix64",
+  "description": "An implementation of the Radix-64 encoding as described by OpenPGP (RFC 4880).",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Philippe Gerber",
+      "email": "philippe@bigwhoop.ch"
+    }
+  ],
+  "require": {
+    "php": ">=5.5",
+    "bigwhoop/crc24": "~1.0@stable"
+  },
+  "require-dev": {
+    "codeception/codeception": "2.0.7",
+    "codeception/specify": "0.4.1"
+  },
+  "autoload": {  
+    "psr-4": {
+      "Bigwhoop\\Radix64\\": "src/"
+    }
+  }
+}
