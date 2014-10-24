@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "85e602fdad953d2f8a6abbab51e87653",
+    "hash": "be7a3e5fceac6bf66c35f1bcb0277f6b",
     "packages": [
         {
             "name": "bigwhoop/crc24",
-            "version": "1.0.1",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bigwhoop/crc24.git",
-                "reference": "c66c2a01bd9fe73e7eeaee10c538af23e5dd2788"
+                "reference": "3a013a6c1a16cdfee2de102b968b02caf77689aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bigwhoop/crc24/zipball/c66c2a01bd9fe73e7eeaee10c538af23e5dd2788",
-                "reference": "c66c2a01bd9fe73e7eeaee10c538af23e5dd2788",
+                "url": "https://api.github.com/repos/bigwhoop/crc24/zipball/3a013a6c1a16cdfee2de102b968b02caf77689aa",
+                "reference": "3a013a6c1a16cdfee2de102b968b02caf77689aa",
                 "shasum": ""
             },
             "require": {
@@ -44,7 +44,7 @@
                 }
             ],
             "description": "A CRC-24 implementation in PHP.",
-            "time": "2014-10-24 15:33:14"
+            "time": "2014-10-24 20:25:23"
         }
     ],
     "packages-dev": [

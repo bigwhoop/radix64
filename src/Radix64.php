@@ -24,7 +24,6 @@ class Radix64
         return wordwrap($body, 64, PHP_EOL, true) . PHP_EOL . "=$checksum";
     }
 
-
     /**
      * @param string $input
      * @return string
@@ -57,7 +56,6 @@ class Radix64
         return $body;
     }
 
-
     /**
      * @param string $body
      * @param string $expectedChecksum
@@ -72,16 +70,14 @@ class Radix64
         }
     }
 
-
     /**
      * @param string $input
      * @return string
      */
     private static function generateChecksum($input)
     {
-        return substr(base64_encode(Crc24::hash($input)), 0, 4);
+        return substr(base64_encode(substr(pack('N', Crc24::hash($input)), 1)), 0, 4);
     }
-
 
     /**
      * @param string $text
