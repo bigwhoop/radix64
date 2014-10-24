@@ -1,4 +1,4 @@
-# OpenPGP Radix-64
+# Radix-64 (as described for OpenPGP)
 
 [![Build Status](https://travis-ci.org/bigwhoop/radix64.svg?branch=master)](https://travis-ci.org/bigwhoop/radix64)
 [![Code Coverage](https://scrutinizer-ci.com/g/bigwhoop/radix64/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/bigwhoop/radix64/?branch=master)
