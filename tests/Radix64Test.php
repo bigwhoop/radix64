@@ -1,14 +1,18 @@
 <?php
-namespace Bigwhoop\Radix64\Test;
+declare(strict_types=1);
 
+namespace Bigwhoop\Radix64\Tests;
+
+use Bigwhoop\Radix64\ChecksumMismatchException;
 use Bigwhoop\Radix64\Radix64;
+use PHPUnit\Framework\TestCase;
 
-class Radix64Test extends \Codeception\TestCase\Test
+class Radix64Test extends TestCase
 {
-    public function testEncoding()
+    public function testEncoding(): void
     {
-        $this->assertSame('dGhpcyBpcyBhIG1lc3NhZ2U=' . PHP_EOL . '=UyEd', Radix64::encode('this is a message'));
-        $this->assertSame(
+        self::assertSame('dGhpcyBpcyBhIG1lc3NhZ2U=' . PHP_EOL . '=UyEd', Radix64::encode('this is a message'));
+        self::assertSame(
             'dGhpcyBpcyBpcyBhIGxvbmcsIGxvbmcgbWVzc2FnZSB0aGF0IHdpbGwgY2F1c2Ug' . PHP_EOL .
             'd3JhcHBpbmcgb2YgdGhlIGJvZHkuCml0IGV2ZW4gY29udGFpbnMgc29tZSBsaW5l' . PHP_EOL .
             'IGJyZWFrcy4gYW5kIGlmIHRoaXMgaXMgbm90IGVub3VnaCwgdGhlbiBJIGRvbid0' . PHP_EOL .
@@ -21,35 +25,35 @@ class Radix64Test extends \Codeception\TestCase\Test
             )
         );
     }
-    
-    public function testDecoding()
+
+    public function testDecoding(): void
     {
-        $this->assertSame('this is a message', Radix64::decode('dGhpcyBpcyBhIG1lc3NhZ2U=' . PHP_EOL . '=UyEd'));
-    }
-    
-    public function testDecodingWithVariousWhitespaces()
-    {
-        $this->assertSame('this is a message', Radix64::decode("dGhp\r\ncyBpc\nyBhI\tG   1lc 3NhZ2U=\r\n\n\n=Uy  Ed\r\n"));
-    }
-    
-    public function testDecodingWithNoChecksum()
-    {
-        $this->assertSame('this is a message', Radix64::decode('dGhpcyBpcyBhIG1lc3NhZ2U='));
+        self::assertSame('this is a message', Radix64::decode('dGhpcyBpcyBhIG1lc3NhZ2U=' . PHP_EOL . '=UyEd'));
     }
 
-    /**
-     * @expectedException \Bigwhoop\Radix64\ChecksumMismatchException
-     * @expectedExceptionMessage Generated checksum 'UyEd' does not match expected checksum 'FFFF'.
-     */
-    public function testDecodingWithInvalidChecksum()
+    public function testDecodingWithVariousWhitespaces(): void
     {
+        self::assertSame('this is a message', Radix64::decode("dGhp\r\ncyBpc\nyBhI\tG   1lc 3NhZ2U=\r\n\n\n=Uy  Ed\r\n"));
+    }
+
+    public function testDecodingWithNoChecksum(): void
+    {
+        self::assertSame('this is a message', Radix64::decode('dGhpcyBpcyBhIG1lc3NhZ2U='));
+    }
+
+    public function testDecodingWithInvalidChecksum(): void
+    {
+        $this->expectExceptionMessage("Generated checksum 'UyEd' does not match expected checksum 'FFFF'.");
+        $this->expectException(ChecksumMismatchException::class);
+
         Radix64::decode('dGhpcyBpcyBhIG1lc3NhZ2U=' . PHP_EOL . '=FFFF');
     }
-    
-    public function testDecodingOfPGPPublicKeys()
+
+    public function testDecodingOfPGPPublicKeys(): void
     {
-        $keys = [];
+        $this->expectNotToPerformAssertions();
         
+        $keys = [];
         $keys[] = <<<KEY
 mQENBFRJN/IBCAC/Nl2pYffxOqrx1BzQqPbzQB4ocMR4wGaW0D6Iwtnnk+VZ+B8U
 Kzy0hg0hQMIFzI2LSgmN+zdMb6vuneZRx1+wcNNPzHp45Ls7pOQbNmXUMBIjHuE2
@@ -78,7 +82,7 @@ ZkpSgtUNJvdxrh7AG7iIIzyOTjK8lrmsoVodO0IJMuPsqxqqTjsiSOgE8qjKM/3V
 N4ifkFE+GNbP8wv1rNvgkgZqYW2+Oyadc3qeubk7qQ==
 =yUW+
 KEY;
-        
+
         $keys[] = <<<KEY
 lQO+BFRJOZgBCACyBtigfzzhrNoDGAP/DH8Y0OsjKkQdoIgSjQ/3oKbTx5c09r2+
 2R/29zT7ANVmaC3toRxcvLZ1quc//SNjc57Nb6sbFFW8K6N4IJJuOkIyRkjXHsd3
@@ -136,14 +140,14 @@ uVk8yl7PsZ/YciK6IPcDYojKo9b/TW2osDi7kk9HHLf3nMK5LCDsze+1mM0O2QDt
 OMPOmW/xHQIt3ln1PszmGrc=
 =RwSd
 KEY;
-        
+
         // http://tools.ietf.org/html/rfc4880#section-6.6
         $keys[] = <<<KEY
 yDgBO22WxBHv7O8X7O/jygAEzol56iUKiXmV+XmpCtmpqQUKiQrFqclFqUDBovzS
 vBSFjNSiVHsuAA==
 =njUN
 KEY;
-        
+
         foreach ($keys as $key) {
             Radix64::decode($key);
         }

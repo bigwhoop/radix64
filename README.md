@@ -1,8 +1,6 @@
 # Radix-64 (as described for OpenPGP)
 
-[![Build Status](https://travis-ci.org/bigwhoop/radix64.svg?branch=master)](https://travis-ci.org/bigwhoop/radix64)
-[![Code Coverage](https://scrutinizer-ci.com/g/bigwhoop/radix64/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/bigwhoop/radix64/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bigwhoop/radix64/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bigwhoop/radix64/?branch=master)
+[![CI](https://github.com/bigwhoop/radix64/actions/workflows/ci.yml/badge.svg)](https://github.com/bigwhoop/radix64/actions/workflows/ci.yml)
 
 OpenPGP, described in [RFC 4880](http://tools.ietf.org/html/rfc4880), describes Radix-64 encoding, also known as "ASCII
 Armor". Radix-64 is identical to the "Base64" encoding described from MIME, with the addition of an optional 24-bit CRC.
@@ -11,7 +9,7 @@ algorithm and, using an additional "=" symbol as separator, appended to the enco
 
 ## Installation
 
-    composer require "bigwhoop/radix64":"~1.0@stable"
+    composer require bigwhoop/radix64
 
 ## Usage
 
@@ -33,4 +31,4 @@ algorithm and, using an additional "=" symbol as separator, appended to the enco
 ## Tests
 
     composer install --dev
-    vendor/bin/codecept run
+    vendor/bin/phpunit
